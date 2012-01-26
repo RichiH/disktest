@@ -1,0 +1,40 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use POSIX qw(strftime);
+
+die "$0: need device to work on" unless $ARGV[0];
+my $device=$ARGV[0];
+chomp $device;
+die "$0: '$device' is not a block device: $!" unless -b $device;
+
+#die unless -x 'badblocks';
+#die unless -x 'smartctl';
+
+die "$0: could not enable SMART on '$device': $!" unless `smartctl -s on $device` or die "";
+my $smart_cmd="smartctl -a $device";
+my $model_family;
+my $device_model;
+my $serial_number;
+
+open(SMART_CMD, "$smart_cmd |") or die;
+while (<SMART_CMD>) {
+	$model_family  = $1 if /Model Family: +(.*)/;
+	$device_model  = $1 if /Device Model: +(.*)/;
+	$serial_number = $1 if /Serial Number: +(.*)/;
+}
+close SMART_CMD;
+$model_family  =~ s/ /_/g;
+$device_model  =~ s/ /_/g;
+$serial_number =~ s/ /_/g;
+my $now_string = strftime "%F--%H-%M-%S-%Z", localtime;
+my $identifier = "$model_family-$device_model-$serial_number-$now_string";
+print "Using '$identifier'\n";
+
+
+system ("smartctl -a $device > $identifier.smartctl-a")     or die "$0: $!";
+system ("smartctl -t long $device")                         or die "$0: $!";
+system ("badblocks -swo $identifier.badblocks-swo $device") or die "$0: $!";
+system ("smartctl -a $device >> $identifier.smartctl-a")    or die "$0: $!";
