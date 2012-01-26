@@ -33,7 +33,8 @@ my $now_string = strftime "%F--%H-%M-%S-%Z", localtime;
 my $identifier = "$model_family-$device_model-$serial_number-$now_string";
 print "Using '$identifier'\n";
 
-
+# TODO detect running badblocks
+# TODO stop test if running
 system ("smartctl -a $device > $identifier.smartctl-a")     or die "$0: $!";
 system ("smartctl -t long $device")                         or die "$0: $!";
 system ("badblocks -swo $identifier.badblocks-swo $device") or die "$0: $!";
