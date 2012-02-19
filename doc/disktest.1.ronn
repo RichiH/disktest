@@ -1,0 +1,42 @@
+disktest(1) - test disk integrity
+=================================
+
+## SYNOPSIS
+
+`disktest` <device>
+
+## DESCRIPTION
+
+`disktest` will test your disks using S.M.A.R.T. and badblocks, saving the
+results into files named after your disks.
+
+## OPTIONS
+
+* <device>:
+  The device you want to test.
+
+## SECURITY CONSIDERATIONS
+
+Basic precautions have been made, i.e. `disktest` will refuse to operate
+on mounted disks. Still, by design, `disktest` will erase any and all data
+on disks you decide to test. You have been warned.
+
+## BUGS
+
+None are known at this time, but reports and/or patches are more than welcome.
+
+## AUTHOR
+
+This manpage and `disktest` itself were written by Richard "RichiH" Hartmann.
+
+## COPYRIGHT
+
+Copyright 2008-2012 Richard Hartmann <richih.mailinglist@gmail.com>
+
+Licensed under the GNU GPL version 3 or higher.
+
+https://github.com/RichiH/disktest
+
+## SEE ALSO
+
+`badblocks`(8), `smartctl`(8)
