@@ -1,5 +1,5 @@
-disktest(1) - test disk integrity
-=================================
+disktest(1) - verify disk integrity
+===================================
 
 ## SYNOPSIS
 
