@@ -1,0 +1,21 @@
+Source: disktest
+Maintainer: Richard Hartmann <richih.mailinglist@gmail.com>
+Section: misc
+Priority: optional
+Standards-Version: 3.9.2
+Build-Depends: debhelper (>= 7), ruby-ronn
+Vcs-Git: git://github.com/RichiH/disktest.git
+Vcs-Browser: https://github.com/RichiH/disktest
+Homepage: https://github.com/RichiH/disktest/blob/master/README.md
+
+Package: disktest
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, e2fsprogs, smartmontools
+Description: verify disk integrity
+ disktest will test your disks using S.M.A.R.T. and badblocks, saving the
+ results into files named after your disk's vendor, model, and serial
+ number.
+ .
+ Basic precautions have been made, i.e. disktest will refuse to operate
+ on mounted disks. Still, by design, disktest will erase any and all data
+ on disks you decide to test. You have been warned.

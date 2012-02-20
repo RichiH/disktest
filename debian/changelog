@@ -1,0 +1,5 @@
+disktest (0.20120220-1) unstable; urgency=low
+
+  * Initial release. (Closes: #660576)
+
+ -- Richard Hartmann <richih.mailinglist@gmail.com>  Mon, 20 Feb 2012 01:23:25 +0100
